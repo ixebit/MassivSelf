@@ -12,11 +12,6 @@ targets:
     deploymentTarget: "17.0"
     sources:
       - path: MassivSelf
-        excludes:
-          - "**/*.xcassets"
-    resources:
-      - path: MassivSelf/Resources/Assets.xcassets
-      - path: MassivSelf/Supporting/PrivacyInfo.xcprivacy
     dependencies:
       - sdk: SwiftData.framework
       - sdk: UserNotifications.framework
