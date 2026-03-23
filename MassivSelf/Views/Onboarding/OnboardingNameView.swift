@@ -6,6 +6,7 @@ import SwiftUI
 struct OnboardingNameView: View {
 
     @Bindable var viewModel: OnboardingViewModel
+    @Environment(AppState.self) private var appState
     @FocusState private var isNameFocused: Bool
 
     var body: some View {
@@ -38,7 +39,7 @@ struct OnboardingNameView: View {
                 .multilineTextAlignment(.center)
                 .focused($isNameFocused)
                 .submitLabel(.done)
-                .onSubmit { viewModel.completeOnboarding() }
+                .onSubmit { completeOnboarding() }
                 .padding(.vertical, 16)
                 .accessibilityLabel(String(localized: "onboarding_name_placeholder"))
 
@@ -54,13 +55,20 @@ struct OnboardingNameView: View {
             // Begin button
             OnboardingPrimaryButton(
                 title: String(localized: "onboarding_button_start"),
-                action: { viewModel.completeOnboarding() }
+                action: { completeOnboarding() }
             )
             .padding(.horizontal, 32)
             .padding(.bottom, 48)
         }
         .onAppear { isNameFocused = true }
         .onTapGesture { isNameFocused = false }
+    }
+
+    private func completeOnboarding() {
+        let trimmed = viewModel.userName.trimmingCharacters(in: .whitespaces)
+        appState.userName = trimmed
+        appState.startDate = Date()
+        appState.hasCompletedOnboarding = true
     }
 }
 

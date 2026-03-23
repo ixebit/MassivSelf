@@ -12,17 +12,10 @@ struct OnboardingContainerView: View {
 
     // MARK: - ViewModel
 
-    @State private var viewModel: OnboardingViewModel
-
-    // MARK: - Init
-
-    init() {
-        // Temporary init — will be replaced in body with environment
-        _viewModel = State(initialValue: OnboardingViewModel(
-            notificationService: NotificationService(),
-            appState: AppState()
-        ))
-    }
+    @State private var viewModel: OnboardingViewModel = OnboardingViewModel(
+        notificationService: NotificationService(),
+        appState: AppState()
+    )
 
     // MARK: - Body
 
